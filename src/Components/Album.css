@@ -1,0 +1,29 @@
+.search-album{
+    display: flex;
+    justify-content: center;
+}
+
+.search-album input{
+    font-size: 1.1rem;
+    padding: 10px;
+    margin: 25px 10px 10px 0px;
+    width: 80%;
+    height: 45px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 4px #eb9494;
+    outline: none;
+}
+
+.search-album button{
+    padding: 10px;
+    font-size: 1.1rem;
+    margin-top: 25px;
+    width: 200px;
+    height: 45px;
+    background-color: rgb(247, 57, 57);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px rgb(235, 148, 148);
+}

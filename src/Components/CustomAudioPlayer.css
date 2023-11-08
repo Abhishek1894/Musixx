@@ -1,0 +1,51 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.audio-player-card{
+    width: 97%;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: #121212;
+    border-radius: 10px;
+    color: white;
+}
+
+input[type="range"]{
+    width: 99%;
+    height: 6px;
+    accent-color: rgb(240, 8, 58);
+    margin: 10px;
+    outline: none;
+}
+
+.track-duration{
+    width: 98%;
+    display: flex;
+    align-self: flex-start;
+    justify-content: space-between;
+    margin: 5px 15px 5px 5px;
+}
+
+button{
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    align-items: center;
+    border-radius: 50px;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(240, 8, 58);
+    color: white;
+}
+
+button:hover{
+    cursor: pointer;
+}
