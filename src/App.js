@@ -1,5 +1,5 @@
 
-import {Route,createBrowserRouter,createRoutesFromElements,RouterProvider} from "react-router-dom";
+import {Route,createBrowserRouter,createRoutesFromElements,RouterProvider,Navigate} from "react-router-dom";
 import Root from "./Components/Root";
 import Home from "./Components/Home";
 import { useEffect, useState } from "react";
@@ -10,16 +10,44 @@ import ShowAlbum from "./Components/ShowAlbum";
 import PlayList from "./Components/PlayList";
 import ShowPlaylist from "./Components/ShowPlaylist"
 import ArtistAlbum from "./Components/ArtistAlbum";
+import SearchBox from "./Components/SearchBox";
+import AlbumSearches from "./Components/AlbumSearches";
+import PlayListSearches from "./Components/PlayListSearches";
+import ArtistSearches from "./Components/ArtistSearches";
+import TopSearches from "./Components/TopSearches";
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<Root/>}>
+
+    {/* Default child root for Root element */}
+    <Route index element={<Navigate to="home"/>}/>
+
+
+    <Route path="search" element={<SearchBox/>}>
+
+      {/* default child root for search box page */}
+      <Route index element={<Navigate to="top" />}/>
+      <Route path="albums" element={<AlbumSearches/>}/>
+      <Route path="playlists" element={<PlayListSearches/>}/>
+      <Route path="albums" element={<AlbumSearches/>}/>
+      <Route path="artists" element={<ArtistSearches/>}/>
+      <Route path="top" element={<TopSearches/>}/>
+    </Route>
+
     <Route path="home" element={<Home/>}/>
+
     <Route path="artists" element={<Artists/>}/>
+
     <Route path="artists/albums" element={<ArtistAlbum/>}/>
+
     <Route path="albums" element={<Albums/>}/>
+
     <Route path="albums/show" element={<ShowAlbum/>}/>
+
     <Route path="playlists" element={<PlayList/>}/>
+
     <Route path="playlists/show" element={<ShowPlaylist/>}/>
+
   </Route>
 ))
 
@@ -40,6 +68,10 @@ function App() {
   const [clickedPlayList,setClickedPlayList] = useState({});
 
   const [clickedArtistId,setClickedArtistId] = useState(null);
+
+  // state hooks for search data
+  const[searchValue,setSearchValue] = useState('');
+  const [fetchedData,setFetchedData] = useState(null); // actually object is going to be assigned
 
   async function getArtistId(artist)
   {
@@ -159,21 +191,57 @@ function App() {
 
   }
 
+  // functions for search functionality
+  async function search(value)
+    {
+        let parameters = 
+        {
+            method: 'GET',
+            headers: 
+            {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+accessToken
+            }
+        }
 
+        let response = await fetch("https://api.spotify.com/v1/search?q="+value+"&type=artist,album,track,playlist",parameters);
+
+        if(response.ok)
+        {
+            let data = await response.json();
+            setFetchedData(data);
+        }
+        else
+            console.log("error");
+    
+    }
+
+    function handleSearchChange(e)
+    {
+        setSearchValue(e.target.value);
+        search(searchValue);
+    }
+
+
+  // important don't delete this
   useEffect(()=>{
     fetchToken();
     // getNewSongs();
   },[]);
 
-
   useEffect(()=>{
-    console.log("Playlist");
-    console.log(newAlbums);
-  },[newAlbums]);
+    console.log(fetchedData);
+  },[fetchedData]);
+
+
+  // useEffect(()=>{
+  //   console.log("Playlist");
+  //   console.log(newAlbums);
+  // },[newAlbums]);
 
   return (
     <div>
-      <context.Provider value={{accessToken,getArtistId,artistIdlist,setArtistIdList,getNewRealeasedAlbums,newAlbums,setNewAlbums,clickedAlbum,setClickedAlbum,getPlaylist,playlist,setPlaylist,clickedPlayList,setClickedPlayList,clickedArtistId,setClickedArtistId}}>
+      <context.Provider value={{accessToken,getArtistId,artistIdlist,setArtistIdList,getNewRealeasedAlbums,newAlbums,setNewAlbums,clickedAlbum,setClickedAlbum,getPlaylist,playlist,setPlaylist,clickedPlayList,setClickedPlayList,clickedArtistId,setClickedArtistId,searchValue,setSearchValue,fetchedData,setFetchedData,search,handleSearchChange}}>
         <RouterProvider router={router}/>
       </context.Provider>
       {/* <button onClick={getPlaylist}>Click</button> */}

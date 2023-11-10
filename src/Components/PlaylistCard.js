@@ -30,7 +30,7 @@ function PlaylistCard(props)
             }}>
             </div>
             <div className="playlist-name">
-                {data.name}
+                {data.name.length > 20 ? <p>{`${data.name.substring(0,20)}...`}</p> : <p>{data.name}</p>}
             </div>
         </div>
     )

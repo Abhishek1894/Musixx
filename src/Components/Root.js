@@ -14,6 +14,7 @@ function Root()
                     <p className="project-name">Musixx</p>
                 </div>
                 <div className="navigation">
+                    <NavLink to={"/search"} className="navlink">Search</NavLink>
                     <NavLink to={"/home"} className="navlink">Home</NavLink>
                     <NavLink to={"/albums"} className="navlink">Albums</NavLink>
                     <NavLink to={"/playlists"} className="navlink">PlayLists</NavLink>
