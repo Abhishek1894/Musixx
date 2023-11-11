@@ -6,7 +6,7 @@ function SearchArtistCard(props)
 
     try{
         return(
-            <div>
+            <div style={{boxShadow:"0px 0px 4px #eb9494", margin:"10px", borderRadius:"8px"}}>
                 <div style={{
                     backgroundImage: `url(${data.images[0].url}`,
                     backgroundRepeat:"no-repeat",
@@ -18,7 +18,15 @@ function SearchArtistCard(props)
                     height:"280px"
                     }}>
                 </div>
-                <div>
+                <div style={{
+                backgroundColor:"#212121", 
+                color:"white", 
+                fontSize:"1.2rem", 
+                textAlign:"center",
+                borderBottomLeftRadius:"8px",
+                borderBottomRightRadius:"8px",
+                padding:"8px"
+                }}>
                     {data.name}
                 </div>
 

@@ -7,7 +7,7 @@ function Artists()
 {
     const {accessToken,getArtistId,artistIdlist,setArtistIdList} = useContext(context);
 
-    let artistNames = ['Anuv Jain','Arijit Singh','Sonu Nigham','Atif Aslam','Shreya Ghoshal','kk','neeti mohan','Jubin Nautiyal','Mohit Chauhan','A R Rahman','honey singh'];
+    let artistNames = ['Arijit Singh','Sonu Nigham','Atif Aslam','Shreya Ghoshal','kk','neeti mohan','Jubin Nautiyal','Mohit Chauhan','A R Rahman','honey singh'];
 
     useEffect(()=>{
         
