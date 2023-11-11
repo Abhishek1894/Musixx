@@ -1,0 +1,9 @@
+.search-artist-card{
+    transition: all 450ms ease-in-out;
+}
+
+.search-artist-card:hover{
+    box-shadow: 0px 0px 7px #eb9494;
+    transform: scale(1.1);
+    cursor: pointer;
+}

@@ -8,6 +8,8 @@ function CustomAudioPlayer(props)
     const [isPlaying,setIsPlaying] = useState(false);
     const [currentTime,setCurrentTime] = useState(0);
     const [duration,setDuration] = useState(0);
+    const [error,setError] = useState(false);
+
     const audioRef = useRef(null);
     const playPauseRef = useRef(null);
 
@@ -70,32 +72,33 @@ function CustomAudioPlayer(props)
         // }
     },[])
 
-    return (
-        <div className="audio-player-card">
+        return (
+            <div className="audio-player-card">
 
-            <p style={{fontSize:"1.4rem",margin:"5px"}}>{track.name}</p>
-            <input type="range"
-            min="0"
-            max={duration}
-            value={currentTime}
-            onChange={handleSeek}
-            />
+                <p style={{fontSize:"1.4rem",margin:"5px"}}>{track.name}</p>
+                <input type="range"
+                min="0"
+                max={duration}
+                value={currentTime}
+                onChange={handleSeek}
+                />
 
-            <audio
-            ref={audioRef}
-            src={track.preview_url} type="audio/mpeg"
-            />
+                <audio
+                ref={audioRef}
+                src={track.preview_url} type="audio/mpeg"
+                />
 
-            <div className="track-duration">
-                <p>{formatDuration(currentTime)}</p>
-                <p>{formatDuration(duration)}</p>
+                <div className="track-duration">
+                    <p>{formatDuration(currentTime)}</p>
+                    <p>{formatDuration(duration)}</p>
+                </div>
+
+                <div>
+                    <button className="fa" ref={playPauseRef}onClick={handlePlayPause}></button>
+                </div>
+
             </div>
-
-            <div>
-                <button className="fa" ref={playPauseRef}onClick={handlePlayPause}></button>
-            </div>
-        </div>
-    )
+        )
 }
 
 export default CustomAudioPlayer;
